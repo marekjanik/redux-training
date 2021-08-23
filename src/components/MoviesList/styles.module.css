@@ -1,0 +1,8 @@
+.movies {
+  margin: 40px;
+}
+
+.movies ul {
+  text-align: center;
+  list-style: none;
+}
