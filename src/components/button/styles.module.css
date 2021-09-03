@@ -1,0 +1,28 @@
+.submitButton {
+  background-color: green;
+  width: 120px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+  text-transform: capitalize;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.removeButton {
+  background-color: crimson;
+  width: 120px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+  text-transform: capitalize;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.submitButton:hover,
+.removeButton:hover {
+  transform: scale(1.05);
+}

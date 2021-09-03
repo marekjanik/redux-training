@@ -1,0 +1,21 @@
+.moviesFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.moviesFormTitle {
+  margin: 20px 0;
+}
+
+.moviesForm {
+  width: 300px;
+}
+
+.moviesFormInput {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px 0;
+}
