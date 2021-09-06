@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { uuid } from '../../utils/uuid';
 import { useDataPersister } from './useDataPersister';
 import { useDataProvider } from './useDataProvider';
@@ -10,60 +10,59 @@ export const useComponent = () => {
   const [title, setTitle] = useState('');
   const trimmedTitle = title.trim();
 
-  const onSubmit = (event) => {
+  const onSubmit = useCallback((event) => {
     event.preventDefault();
-  };
+  }, []);
 
-  const onChange = (event) => {
+  const onChange = useCallback((event) => {
     setTitle(event.target.value);
-  };
+  }, []);
 
-  const onAddMovie = () => {
+  const onAddMovie = useCallback(() => {
     if (trimmedTitle.length === 0) {
       alert(errors.empty_title);
       return;
     }
-
     if (isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
       alert(errors.add_present_element);
       return;
     }
-
     addMovieToList(trimmedTitle);
     setTitle('');
-  };
+  }, [trimmedTitle, isMovieOfGivenTitleAlreadyOnTheList, addMovieToList]);
 
-  const onRemoveMovie = () => {
+  const onRemoveMovie = useCallback(() => {
     if (trimmedTitle.length === 0) {
       alert(errors.empty_title);
       return;
     }
-
     if (!isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
       alert(errors.remove_absent_element);
       return;
     }
-
     removeMovieFromList(trimmedTitle);
     setTitle('');
-  };
+  }, [trimmedTitle, isMovieOfGivenTitleAlreadyOnTheList, removeMovieFromList]);
 
-  const buttonsData = [
-    {
-      id: uuid(),
-      className: 'submitButton',
-      type: 'submit',
-      description: 'add movie',
-      onClick: onAddMovie,
-    },
-    {
-      id: uuid(),
-      className: 'removeButton',
-      type: 'button',
-      description: 'remove movie',
-      onClick: onRemoveMovie,
-    },
-  ];
+  const buttonsData = useMemo(
+    () => [
+      {
+        id: uuid(),
+        className: 'submitButton',
+        type: 'submit',
+        description: 'add movie',
+        onClick: onAddMovie,
+      },
+      {
+        id: uuid(),
+        className: 'removeButton',
+        type: 'button',
+        description: 'remove movie',
+        onClick: onRemoveMovie,
+      },
+    ],
+    [onAddMovie, onRemoveMovie]
+  );
 
   return {
     title,

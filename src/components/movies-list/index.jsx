@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDataProvider } from './useDataProvider';
+import { useComponent } from './useComponent';
 import styles from './styles.module.css';
 
 const MoviesList = () => {
-  const { moviesList } = useDataProvider();
+  const { moviesList } = useComponent();
 
   return (
     <section className={styles.moviesListContainer}>
