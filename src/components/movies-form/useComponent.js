@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { uuid } from '../../utils/uuid';
 import { useDataPersister } from './useDataPersister';
 import { useDataProvider } from './useDataProvider';
 import { errors } from '../../common/errors';
@@ -49,15 +50,17 @@ export const useComponent = () => {
 
   const buttonsData = [
     {
-      description: 'add movie',
-      type: 'submit',
+      id: uuid(),
       className: 'submitButton',
+      type: 'submit',
+      description: 'add movie',
       onClick: onAddMovie,
     },
     {
-      description: 'remove movie',
-      type: 'button',
+      id: uuid(),
       className: 'removeButton',
+      type: 'button',
+      description: 'remove movie',
       onClick: onRemoveMovie,
     },
   ];

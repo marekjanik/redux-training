@@ -1,9 +1,9 @@
 .submitButton {
-  background-color: green;
   width: 120px;
+  padding: 5px;
   border: 1px solid transparent;
   border-radius: 10px;
-  padding: 5px;
+  background-color: green;
   color: white;
   text-transform: capitalize;
   transition: 0.2s;
@@ -11,11 +11,11 @@
 }
 
 .removeButton {
-  background-color: crimson;
   width: 120px;
+  padding: 5px;
   border: 1px solid transparent;
   border-radius: 10px;
-  padding: 5px;
+  background-color: crimson;
   color: white;
   text-transform: capitalize;
   transition: 0.2s;
