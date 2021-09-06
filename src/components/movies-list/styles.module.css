@@ -1,21 +1,21 @@
 .moviesListContainer {
-  width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
   margin-top: 40px;
 }
 
 .moviesList {
   width: 300px;
-  text-align: center;
   list-style: none;
+  text-align: center;
 }
 
 .movie {
-  border: 1px solid gray;
   margin: 10px 0;
   padding: 5px;
+  border: 1px solid gray;
   background-color: #eee;
 }

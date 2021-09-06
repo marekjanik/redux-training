@@ -1,14 +1,16 @@
 import React from 'react';
 import { useComponent } from './useComponent';
+import { useDataProvider } from './useDataProvider';
 import ButtonPanel from '../button-panel/index';
 import styles from './styles.module.css';
 
 const MoviesForm = () => {
   const { title, buttonsData, onSubmit, onChange } = useComponent();
+  const { moviesDescription } = useDataProvider();
 
   return (
     <section className={styles.moviesFormContainer}>
-      <h1 className={styles.moviesFormTitle}>Favourite Movies List</h1>
+      <h1 className={styles.moviesFormTitle}>{moviesDescription}</h1>
       <form onSubmit={onSubmit} className={styles.moviesForm}>
         <input
           value={title}
@@ -20,15 +22,5 @@ const MoviesForm = () => {
     </section>
   );
 };
-
-// buttonsData.map((button) => (
-//   <button
-//     type="submit"
-//     key={button.description}
-//     onClick={button.onClick}
-//   >
-//     {button.description}
-//   </button>
-// ))
 
 export default MoviesForm;
