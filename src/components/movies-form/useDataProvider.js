@@ -1,10 +1,14 @@
 import { useSelector } from 'react-redux';
+import {
+  selectMoviesList,
+  selectMoviesListDescription,
+} from '../../models/movies/selectors';
 
 export const useDataProvider = () => {
-  const moviesList = useSelector((state) => state.moviesModel.list);
+  const moviesList = useSelector((state) => selectMoviesList(state));
 
-  const moviesDescription = useSelector(
-    (state) => state.moviesModel.description
+  const moviesDescription = useSelector((state) =>
+    selectMoviesListDescription(state)
   );
 
   const isMovieOfGivenTitleAlreadyOnTheList = (newMovieTitle) => {
@@ -16,7 +20,6 @@ export const useDataProvider = () => {
   };
 
   return {
-    moviesList,
     moviesDescription,
     isMovieOfGivenTitleAlreadyOnTheList,
   };
