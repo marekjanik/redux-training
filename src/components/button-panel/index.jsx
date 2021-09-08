@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../button/index';
 import styles from './styles.module.css';
+import Button from '../button/index';
 
 const ButtonPanel = ({ buttons }) => {
   return <div className={styles.buttonPanel}>{renderButtons(buttons)}</div>;

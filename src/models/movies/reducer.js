@@ -1,5 +1,5 @@
-import produce from 'immer';
 import * as moviesActionTypes from './types';
+import produce from '../../utils/immer';
 import { basic_data } from '../../common/samples';
 
 const INITIAL_STATE = basic_data;
@@ -17,6 +17,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
         );
       });
     default:
-      return state;
+      return produce(state, () => {});
   }
 };

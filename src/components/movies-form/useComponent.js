@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
-import { uuid } from '../../utils/uuid';
 import { useDataPersister } from './useDataPersister';
 import { useDataProvider } from './useDataProvider';
+import { uuid } from '../../utils/uuid';
 import { errors } from '../../common/errors';
 
 export const useComponent = () => {
@@ -18,32 +18,6 @@ export const useComponent = () => {
     setTitle(event.target.value);
   }, []);
 
-  const onAddMovie = useCallback(() => {
-    if (trimmedTitle.length === 0) {
-      alert(errors.empty_title);
-      return;
-    }
-    if (isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
-      alert(errors.add_present_element);
-      return;
-    }
-    addMovieToList(trimmedTitle);
-    setTitle('');
-  }, [trimmedTitle, isMovieOfGivenTitleAlreadyOnTheList, addMovieToList]);
-
-  const onRemoveMovie = useCallback(() => {
-    if (trimmedTitle.length === 0) {
-      alert(errors.empty_title);
-      return;
-    }
-    if (!isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
-      alert(errors.remove_absent_element);
-      return;
-    }
-    removeMovieFromList(trimmedTitle);
-    setTitle('');
-  }, [trimmedTitle, isMovieOfGivenTitleAlreadyOnTheList, removeMovieFromList]);
-
   const buttonsData = useMemo(
     () => [
       {
@@ -51,17 +25,44 @@ export const useComponent = () => {
         className: 'submitButton',
         type: 'submit',
         description: 'add movie',
-        onClick: onAddMovie,
+        onClick: () => {
+          if (trimmedTitle.length === 0) {
+            alert(errors.empty_title);
+            return;
+          }
+          if (isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
+            alert(errors.add_present_element);
+            return;
+          }
+          addMovieToList(trimmedTitle);
+          setTitle('');
+        },
       },
       {
         id: uuid(),
         className: 'removeButton',
         type: 'button',
         description: 'remove movie',
-        onClick: onRemoveMovie,
+        onClick: () => {
+          if (trimmedTitle.length === 0) {
+            alert(errors.empty_title);
+            return;
+          }
+          if (!isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
+            alert(errors.remove_absent_element);
+            return;
+          }
+          removeMovieFromList(trimmedTitle);
+          setTitle('');
+        },
       },
     ],
-    [onAddMovie, onRemoveMovie]
+    [
+      trimmedTitle,
+      isMovieOfGivenTitleAlreadyOnTheList,
+      addMovieToList,
+      removeMovieFromList,
+    ]
   );
 
   return {
