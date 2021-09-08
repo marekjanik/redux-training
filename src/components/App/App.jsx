@@ -1,9 +1,7 @@
 import React from 'react';
-
+import './App.css';
 import MoviesForm from '../movies-form';
 import MoviesList from '../movies-list';
-
-import './App.css';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
-import { uuid } from '../../utils/uuid';
 import * as moviesActionTypes from './types';
+import { uuid } from '../../utils/uuid';
 
 export const addMovie = (newMovieTitle) => {
   return {

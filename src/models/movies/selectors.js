@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const moviesModel = (state) => state.moviesModel;
+const moviesModel = (store) => store.moviesModel;
 
 export const selectMoviesListDescription = createSelector(
   moviesModel,

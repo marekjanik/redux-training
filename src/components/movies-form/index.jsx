@@ -1,8 +1,8 @@
 import React from 'react';
 import { useComponent } from './useComponent';
 import { useDataProvider } from './useDataProvider';
-import ButtonPanel from '../button-panel/index';
 import styles from './styles.module.css';
+import ButtonPanel from '../button-panel/index';
 
 const MoviesForm = () => {
   const { title, buttonsData, onSubmit, onChange } = useComponent();
