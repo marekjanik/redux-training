@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+import { StoreType } from '../../common/types';
 
-const moviesModel = (store) => store.moviesModel;
+const moviesModel = (store: StoreType) => store.moviesModel;
 
 export const selectMoviesListDescription = createSelector(
   moviesModel,

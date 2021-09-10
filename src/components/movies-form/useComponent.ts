@@ -1,24 +1,35 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, ChangeEventHandler } from 'react';
 import { useDataPersister } from './useDataPersister';
 import { useDataProvider } from './useDataProvider';
+import { ButtonPropsType } from '../button';
 import { uuid } from '../../utils/uuid';
 import { errors } from '../../common/errors';
 
-export const useComponent = () => {
+type UseComponentType = {
+  title: string;
+  onSubmit: ChangeEventHandler<HTMLFormElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  buttonsData: ButtonPropsType[];
+};
+
+export const useComponent = (): UseComponentType => {
   const { addMovieToList, removeMovieFromList } = useDataPersister();
   const { isMovieOfGivenTitleAlreadyOnTheList } = useDataProvider();
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState<string>('');
   const trimmedTitle = title.trim();
 
-  const onSubmit = useCallback((event) => {
+  const onSubmit = useCallback<ChangeEventHandler<HTMLFormElement>>((event) => {
     event.preventDefault();
   }, []);
 
-  const onChange = useCallback((event) => {
-    setTitle(event.target.value);
-  }, []);
+  const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    (event) => {
+      setTitle(event.target.value);
+    },
+    []
+  );
 
-  const buttonsData = useMemo(
+  const buttonsData = useMemo<ButtonPropsType[]>(
     () => [
       {
         id: uuid(),
@@ -34,7 +45,7 @@ export const useComponent = () => {
             alert(errors.add_present_element);
             return;
           }
-          addMovieToList(trimmedTitle);
+          addMovieToList(trimmedTitle, uuid());
           setTitle('');
         },
       },
@@ -67,8 +78,8 @@ export const useComponent = () => {
 
   return {
     title,
-    buttonsData,
     onSubmit,
     onChange,
+    buttonsData,
   };
 };

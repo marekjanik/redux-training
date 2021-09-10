@@ -3,13 +3,13 @@ import './App.css';
 import MoviesForm from '../movies-form';
 import MoviesList from '../movies-list';
 
-function App() {
+const App: React.FC = () => {
   return (
     <React.Fragment>
       <MoviesForm />
       <MoviesList />
     </React.Fragment>
   );
-}
+};
 
 export default App;

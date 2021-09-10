@@ -1,8 +1,9 @@
 import React from 'react';
 import { useComponent } from './useComponent';
 import styles from './styles.module.css';
+import { MovieObjectType } from '../../common/types';
 
-const MoviesList = () => {
+const MoviesList: React.FC = () => {
   const { moviesList } = useComponent();
 
   return (
@@ -12,7 +13,7 @@ const MoviesList = () => {
   );
 };
 
-const renderMoviesList = (moviesList) => {
+const renderMoviesList = (moviesList: MovieObjectType[]) => {
   return moviesList.map((movie) => (
     <li key={movie.id} className={styles.movie}>
       {movie.title}
