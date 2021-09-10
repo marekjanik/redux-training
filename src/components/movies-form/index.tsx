@@ -4,7 +4,7 @@ import { useDataProvider } from './useDataProvider';
 import styles from './styles.module.css';
 import ButtonPanel from '../button-panel/index';
 
-const MoviesForm = () => {
+const MoviesForm: React.FC = () => {
   const { title, buttonsData, onSubmit, onChange } = useComponent();
   const { moviesDescription } = useDataProvider();
 

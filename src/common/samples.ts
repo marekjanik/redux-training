@@ -1,6 +1,7 @@
+import { MoviesModelStateType } from './types';
 import { uuid } from '../utils/uuid';
 
-export const basic_data = {
+export const basic_data: MoviesModelStateType = {
   description: 'Favourite movies list',
   list: [
     {

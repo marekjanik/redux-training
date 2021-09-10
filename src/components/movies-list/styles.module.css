@@ -18,4 +18,5 @@
   padding: 5px;
   border: 1px solid gray;
   background-color: #eee;
+  word-wrap: break-word;
 }
