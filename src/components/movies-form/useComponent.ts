@@ -1,22 +1,24 @@
-import { useState, useCallback, useMemo, ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useState, useCallback, useMemo } from 'react';
 import { useDataPersister } from './useDataPersister';
 import { useDataProvider } from './useDataProvider';
 import { ButtonPropsType } from '../button';
+import { ErrorsEnum } from '../../common/enums';
 import { uuid } from '../../utils/uuid';
-import { errors } from '../../common/errors';
 
 type UseComponentType = {
   title: string;
+  moviesDescription: string;
+  buttonsData: ButtonPropsType[];
   onSubmit: ChangeEventHandler<HTMLFormElement>;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  buttonsData: ButtonPropsType[];
 };
 
 export const useComponent = (): UseComponentType => {
-  const { addMovieToList, removeMovieFromList } = useDataPersister();
-  const { isMovieOfGivenTitleAlreadyOnTheList } = useDataProvider();
   const [title, setTitle] = useState<string>('');
   const trimmedTitle = title.trim();
+  const { isMovieOfGivenTitleAlreadyOnTheList, moviesDescription } =
+    useDataProvider(trimmedTitle);
+  const { addMovieToList, removeMovieFromList } = useDataPersister();
 
   const onSubmit = useCallback<ChangeEventHandler<HTMLFormElement>>((event) => {
     event.preventDefault();
@@ -38,11 +40,11 @@ export const useComponent = (): UseComponentType => {
         description: 'add movie',
         onClick: () => {
           if (trimmedTitle.length === 0) {
-            alert(errors.empty_title);
+            alert(ErrorsEnum.empty_title);
             return;
           }
-          if (isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
-            alert(errors.add_present_element);
+          if (isMovieOfGivenTitleAlreadyOnTheList) {
+            alert(ErrorsEnum.add_present_element);
             return;
           }
           addMovieToList(trimmedTitle, uuid());
@@ -56,11 +58,11 @@ export const useComponent = (): UseComponentType => {
         description: 'remove movie',
         onClick: () => {
           if (trimmedTitle.length === 0) {
-            alert(errors.empty_title);
+            alert(ErrorsEnum.empty_title);
             return;
           }
-          if (!isMovieOfGivenTitleAlreadyOnTheList(trimmedTitle)) {
-            alert(errors.remove_absent_element);
+          if (!isMovieOfGivenTitleAlreadyOnTheList) {
+            alert(ErrorsEnum.remove_absent_element);
             return;
           }
           removeMovieFromList(trimmedTitle);
@@ -78,8 +80,9 @@ export const useComponent = (): UseComponentType => {
 
   return {
     title,
+    moviesDescription,
+    buttonsData,
     onSubmit,
     onChange,
-    buttonsData,
   };
 };

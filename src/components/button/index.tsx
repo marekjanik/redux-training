@@ -12,11 +12,11 @@ export type ButtonPropsType = {
   onClick: VoidFunction;
 };
 
-const Button: React.FC<ButtonPropsType> = ({
+export const Button: React.FC<ButtonPropsType> = ({
   type,
   onClick,
-  description,
   className,
+  description,
 }) => {
   return (
     <button type={type} onClick={onClick} className={styles[className]}>
@@ -24,5 +24,3 @@ const Button: React.FC<ButtonPropsType> = ({
     </button>
   );
 };
-
-export default Button;

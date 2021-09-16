@@ -12,3 +12,14 @@ export const selectMoviesList = createSelector(
   moviesModel,
   (moviesModelState) => moviesModelState.list
 );
+
+export const selectIfMovieOfGivenTitleIsAlreadyOnTheList = (
+  movieTitle: string
+) =>
+  createSelector(selectMoviesList, (moviesList) => {
+    return (
+      moviesList.findIndex(
+        ({ title }) => title.toLowerCase() === movieTitle.toLowerCase()
+      ) >= 0
+    );
+  });
