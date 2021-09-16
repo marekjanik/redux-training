@@ -1,12 +1,11 @@
 import React from 'react';
 import { useComponent } from './useComponent';
-import { useDataProvider } from './useDataProvider';
 import styles from './styles.module.css';
-import ButtonPanel from '../button-panel/index';
+import { ButtonPanel } from '../button-panel';
 
-const MoviesForm: React.FC = () => {
-  const { title, buttonsData, onSubmit, onChange } = useComponent();
-  const { moviesDescription } = useDataProvider();
+export const MoviesForm: React.FC = () => {
+  const { title, moviesDescription, buttonsData, onSubmit, onChange } =
+    useComponent();
 
   return (
     <section className={styles.moviesFormContainer}>
@@ -22,5 +21,3 @@ const MoviesForm: React.FC = () => {
     </section>
   );
 };
-
-export default MoviesForm;

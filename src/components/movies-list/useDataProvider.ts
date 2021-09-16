@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { StoreType } from '../../common/types';
 import { selectMoviesList } from '../../models/movies/selectors';
+import { StoreType } from '../../common/types';
 
 type UseDataProviderType = {
   moviesList: ReturnType<typeof selectMoviesList>;

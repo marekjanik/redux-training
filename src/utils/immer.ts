@@ -1,3 +1,1 @@
-import produce from 'immer';
-
-export default produce;
+export { produce } from 'immer';

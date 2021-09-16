@@ -3,7 +3,7 @@ import { useComponent } from './useComponent';
 import styles from './styles.module.css';
 import { MovieObjectType } from '../../common/types';
 
-const MoviesList: React.FC = () => {
+export const MoviesList: React.FC = () => {
   const { moviesList } = useComponent();
 
   return (
@@ -20,5 +20,3 @@ const renderMoviesList = (moviesList: MovieObjectType[]) => {
     </li>
   ));
 };
-
-export default MoviesList;

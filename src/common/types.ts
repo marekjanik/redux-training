@@ -14,12 +14,6 @@ export type MoviesModelStateType = {
   list: MovieObjectType[];
 };
 
-export type MoviesModelActionType = {
-  type: string;
-  movieTitle: string;
-  movieId: IdType;
-};
-
 export type StoreType = {
   moviesModel: MoviesModelStateType;
 };

@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './styles.module.css';
-import Button, { ButtonPropsType } from '../button/index';
+import { Button, ButtonPropsType } from '../button';
 
 type ButtonPanelPropsType = {
   buttons: ButtonPropsType[];
 };
 
-const ButtonPanel: React.FC<ButtonPanelPropsType> = ({ buttons }) => {
+export const ButtonPanel: React.FC<ButtonPanelPropsType> = ({ buttons }) => {
   return <div className={styles.buttonPanel}>{renderButtons(buttons)}</div>;
 };
 
@@ -24,5 +24,3 @@ const renderButtons = (buttons: ButtonPanelPropsType['buttons']) => {
     </Button>
   ));
 };
-
-export default ButtonPanel;
