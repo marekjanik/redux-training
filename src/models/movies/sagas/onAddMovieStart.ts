@@ -3,12 +3,12 @@ import { ADD_MOVIE_START } from "../types";
 import { addMovieStart, storeMovies } from "../actions";
 import { selectMoviesList } from "../selectors";
 import { ErrorsEnum, MovieObjectType } from "../../../common/index";
-import { uuid } from "../../../utils";
+import { produce, uuid } from "../../../utils";
 
 type actionType = ReturnType<typeof addMovieStart>;
 
 function* onAddMovie({ movieTitle }: actionType) {
-  const moviesList = yield* select(selectMoviesList);
+  const moviesList = produce(yield* select(selectMoviesList), (draft) => draft);
 
   const isMovieOfGivenTitleAlreadyOnTheList =
     moviesList.findIndex(

@@ -2,14 +2,14 @@ import { select, put, call, takeLatest } from "typed-redux-saga";
 import { FETCH_MOVIES_LIST_START } from "../types";
 import { storeMovies } from "../actions";
 import { selectMoviesList } from "../selectors";
-import { EndpointsEnum, MethodsEnum } from "../../../common";
-import { assertIfAreOfMovieObjectType } from "../../../utils";
+import { EndpointsEnum, MethodsEnum, ErrorsEnum } from "../../../common";
+import { produce, assertIfAreOfMovieObjectType } from "../../../utils";
 
 function* onFetchMoviesList() {
-  const moviesList = yield* select(selectMoviesList);
+  const moviesList = produce(yield* select(selectMoviesList), (draft) => draft);
 
   const fetchedData = yield* call(() => onFetchOuterData());
-  if (!fetchedData) {
+  if (typeof fetchedData === "string") {
     alert(fetchedData);
     return;
   }
@@ -30,8 +30,9 @@ function* onFetchOuterData() {
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) {
-      alert(error.message);
-      console.log(error.message);
+      return error.message;
+    } else {
+      return ErrorsEnum.fetch;
     }
   }
 }
