@@ -1,21 +1,35 @@
-import * as moviesActionTypes from './types';
-import { IdType } from '../../common/types';
+import * as moviesActionTypes from "./types";
+import { MovieObjectType } from "../../common/types";
 
-export const addMovie = (movieTitle: string, movieId: IdType) => {
+export const addMovieStart = (movieTitle: string) => {
   return <const>{
-    type: moviesActionTypes.ADD_MOVIE,
-    movieTitle,
-    movieId,
-  };
-};
-
-export const removeMovie = (movieTitle: string) => {
-  return <const>{
-    type: moviesActionTypes.REMOVE_MOVIE,
+    type: moviesActionTypes.ADD_MOVIE_START,
     movieTitle,
   };
 };
+
+export const removeMovieStart = (movieTitle: string) => {
+  return <const>{
+    type: moviesActionTypes.REMOVE_MOVIE_START,
+    movieTitle,
+  };
+};
+
+export const fetchMoviesListStart = () => {
+  return <const>{
+    type: moviesActionTypes.FETCH_MOVIES_LIST_START,
+  };
+};
+
+export const storeMovies = (moviesToBeStored: MovieObjectType[]) =>
+  <const>{
+    type: moviesActionTypes.STORE_MOVIES,
+    moviesToBeStored,
+  };
 
 export type MoviesModelActionType = ReturnType<
-  typeof addMovie | typeof removeMovie
+  | typeof addMovieStart
+  | typeof removeMovieStart
+  | typeof fetchMoviesListStart
+  | typeof storeMovies
 >;
