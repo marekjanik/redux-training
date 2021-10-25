@@ -1,31 +1,31 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { addMovie, removeMovie } from '../../models/movies/actions';
-import { DispatchType } from '../../common/types';
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { addMovieStart, removeMovieStart } from "../../models/movies/actions";
+import { DispatchType } from "../../common/types";
 
 type UseDataPersisterType = {
-  addMovieToList: typeof addMovie;
-  removeMovieFromList: typeof removeMovie;
+  addMovie: typeof addMovieStart;
+  removeMovie: typeof removeMovieStart;
 };
 
 export const useDataPersister = (): UseDataPersisterType => {
   const dispatch =
     useDispatch<
-      DispatchType<ReturnType<typeof addMovie | typeof removeMovie>>
+      DispatchType<ReturnType<typeof addMovieStart | typeof removeMovieStart>>
     >();
 
-  const addMovieToList = useCallback<typeof addMovie>(
-    (movieTitle, movieId) => dispatch(addMovie(movieTitle, movieId)),
+  const addMovie = useCallback<typeof addMovieStart>(
+    (movieTitle) => dispatch(addMovieStart(movieTitle)),
     [dispatch]
   );
 
-  const removeMovieFromList = useCallback<typeof removeMovie>(
-    (movieTitle) => dispatch(removeMovie(movieTitle)),
+  const removeMovie = useCallback<typeof removeMovieStart>(
+    (movieTitle) => dispatch(removeMovieStart(movieTitle)),
     [dispatch]
   );
 
   return {
-    addMovieToList,
-    removeMovieFromList,
+    addMovie,
+    removeMovie,
   };
 };

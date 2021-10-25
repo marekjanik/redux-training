@@ -1,8 +1,8 @@
-import * as moviesActionTypes from './types';
-import { MoviesModelActionType } from './actions';
-import { ReducerType, MoviesModelStateType } from '../../common/types';
-import { basic_data } from '../../common/samples';
-import { produce } from '../../utils/immer';
+import * as moviesActionTypes from "./types";
+import { MoviesModelActionType } from "./actions";
+import { ReducerType, MoviesModelStateType } from "../../common/types";
+import { basic_data } from "../../common/samples";
+import { produce } from "../../utils/immer";
 
 const INITIAL_STATE = basic_data;
 
@@ -11,16 +11,9 @@ export const moviesReducer: ReducerType<
   MoviesModelActionType
 > = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case moviesActionTypes.ADD_MOVIE:
+    case moviesActionTypes.STORE_MOVIES:
       return produce(state, (draft) => {
-        draft.list.push({ title: action.movieTitle, id: action.movieId });
-      });
-    case moviesActionTypes.REMOVE_MOVIE:
-      return produce(state, (draft) => {
-        draft.list = draft.list.filter(
-          (movie) =>
-            movie.title.toLowerCase() !== action.movieTitle.toLowerCase()
-        );
+        draft.list = action.moviesToBeStored;
       });
     default:
       return produce(state, () => {});

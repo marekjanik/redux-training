@@ -1,9 +1,9 @@
-import { ChangeEventHandler, useState, useCallback, useMemo } from 'react';
-import { useDataPersister } from './useDataPersister';
-import { useDataProvider } from './useDataProvider';
-import { ButtonPropsType } from '../button';
-import { ErrorsEnum } from '../../common/enums';
-import { uuid } from '../../utils/uuid';
+import { ChangeEventHandler, useState, useCallback, useMemo } from "react";
+import { useDataPersister } from "./useDataPersister";
+import { useDataProvider } from "./useDataProvider";
+import { ButtonPropsType } from "../button";
+import { ErrorsEnum } from "../../common/enums";
+import { uuid } from "../../utils/uuid";
 
 type UseComponentType = {
   title: string;
@@ -14,11 +14,10 @@ type UseComponentType = {
 };
 
 export const useComponent = (): UseComponentType => {
-  const [title, setTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>("");
   const trimmedTitle = title.trim();
-  const { isMovieOfGivenTitleAlreadyOnTheList, moviesDescription } =
-    useDataProvider(trimmedTitle);
-  const { addMovieToList, removeMovieFromList } = useDataPersister();
+  const { moviesDescription } = useDataProvider();
+  const { addMovie, removeMovie } = useDataPersister();
 
   const onSubmit = useCallback<ChangeEventHandler<HTMLFormElement>>((event) => {
     event.preventDefault();
@@ -34,48 +33,35 @@ export const useComponent = (): UseComponentType => {
   const buttonsData = useMemo<ButtonPropsType[]>(
     () => [
       {
+        description: "add movie",
+        type: "submit",
         id: uuid(),
-        className: 'submitButton',
-        type: 'submit',
-        description: 'add movie',
+        className: "submitButton",
         onClick: () => {
           if (trimmedTitle.length === 0) {
             alert(ErrorsEnum.empty_title);
             return;
           }
-          if (isMovieOfGivenTitleAlreadyOnTheList) {
-            alert(ErrorsEnum.add_present_element);
-            return;
-          }
-          addMovieToList(trimmedTitle, uuid());
-          setTitle('');
+          addMovie(trimmedTitle);
+          setTitle("");
         },
       },
       {
+        description: "remove movie",
+        type: "button",
         id: uuid(),
-        className: 'removeButton',
-        type: 'button',
-        description: 'remove movie',
+        className: "removeButton",
         onClick: () => {
           if (trimmedTitle.length === 0) {
             alert(ErrorsEnum.empty_title);
             return;
           }
-          if (!isMovieOfGivenTitleAlreadyOnTheList) {
-            alert(ErrorsEnum.remove_absent_element);
-            return;
-          }
-          removeMovieFromList(trimmedTitle);
-          setTitle('');
+          removeMovie(trimmedTitle);
+          setTitle("");
         },
       },
     ],
-    [
-      trimmedTitle,
-      isMovieOfGivenTitleAlreadyOnTheList,
-      addMovieToList,
-      removeMovieFromList,
-    ]
+    [trimmedTitle, addMovie, removeMovie]
   );
 
   return {
