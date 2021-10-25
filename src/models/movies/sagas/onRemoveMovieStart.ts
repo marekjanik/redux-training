@@ -3,11 +3,12 @@ import { REMOVE_MOVIE_START } from "../types";
 import { removeMovieStart, storeMovies } from "../actions";
 import { selectMoviesList } from "../selectors";
 import { ErrorsEnum } from "../../../common/index";
+import { produce } from "../../../utils";
 
 type actionType = ReturnType<typeof removeMovieStart>;
 
 function* onRemoveMovie({ movieTitle }: actionType) {
-  const moviesList = yield* select(selectMoviesList);
+  const moviesList = produce(yield* select(selectMoviesList), (draft) => draft);
 
   const isMovieOfGivenTitleAlreadyOnTheList =
     moviesList.findIndex(

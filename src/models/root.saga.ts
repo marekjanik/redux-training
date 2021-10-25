@@ -1,4 +1,4 @@
-import { all, call } from "redux-saga/effects";
+import { all, call } from "typed-redux-saga";
 import { moviesSagas } from "./movies/sagas";
 
 export function* rootSaga() {
