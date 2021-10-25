@@ -4,7 +4,7 @@ import { onRemoveMovieStart } from "./onRemoveMovieStart";
 import { onFetchMoviesListStart } from "./onFetchMoviesListStart";
 
 export function* moviesSagas() {
-  yield all([
+  yield* all([
     call(onAddMovieStart),
     call(onRemoveMovieStart),
     call(onFetchMoviesListStart),
